@@ -102,39 +102,39 @@ sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
 sudo apt-get install libopenblas-dev
 ```
 * Create Makefile.config
-        ```bash
-        cd caffe
-        cp Makefile.config.example Makefile.config
-        ```
-         * For CPU only, uncomment line 8:
-        ```bash
-        # CPU_ONLY := 1
-        -->
-        CPU_ONLY := 1
-        ```
-         * For GPU, you must have nvidia drivers & CUDA & optionally cudnn installed, then uncomment line 5 if you want to use cudnn and leave line 8 commented:
-        ```bash
-        # USE_CUDNN := 1
-        -->
-        USE_CUDNN := 1
-        ...
-        # CPU_ONLY := 1
-        ```
-         * add hdf5 lib & include paths to INCLUDE_DIRS and LIBRARY_DIRS (lines 90-91):
-        ```bash
-        INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
-        LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib/serial/
-        -->
-        INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/
-        LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu/hdf5/serial/
-        ```
-        NOTE: For the TX2, the library dir is `/usr/lib/aarch64-linux-gnu/hdf5/serial/` instead of `/usr/lib/x86_64-linux-gnu/hdf5/serial/`
-         * If you use OpenCV version 3+, uncomment line 23:
-        ```bash
-        # OPENCV_VERSION := 3
-        -->
-        OPENCV_VERSION := 3
-        ```
+  ```bash
+  cd caffe
+  cp Makefile.config.example Makefile.config
+  ```
+  * For CPU only, uncomment line 8:
+  ```bash
+  # CPU_ONLY := 1
+  -->
+  CPU_ONLY := 1
+  ```
+  * For GPU, you must have nvidia drivers & CUDA & optionally cudnn installed, then uncomment line 5 if you want to use cudnn and leave line 8 commented:
+  ```bash
+  # USE_CUDNN := 1
+  -->
+  USE_CUDNN := 1
+  ...
+  # CPU_ONLY := 1
+  ```
+  * add hdf5 lib & include paths to INCLUDE_DIRS and LIBRARY_DIRS (lines 90-91):
+  ```bash
+  INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
+  LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib/serial/
+  -->
+  INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/
+  LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu/hdf5/serial/
+  ```
+  NOTE: For the TX2, the library dir is `/usr/lib/aarch64-linux-gnu/hdf5/serial/` instead of `/usr/lib/x86_64-linux-gnu/hdf5/serial/`
+  * If you use OpenCV version 3+, uncomment line 23:
+  ```bash
+  # OPENCV_VERSION := 3
+  -->
+  OPENCV_VERSION := 3
+  ```
 * Make core:
 `make -j4`
 NOTE: The option '-j4' will use more threads, and the make command will finish faster.
