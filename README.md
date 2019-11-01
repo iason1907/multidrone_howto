@@ -24,6 +24,12 @@ sudo apt-get install python-catkin-tools python-rosinstall-generator -y
 
 ## Install prerequisites
 
+* **Install git and cmake**
+```bash
+sudo apt-get install git
+sudo apt-get install cmake
+```
+
 * **Install libusbp**
 
 ```bash
