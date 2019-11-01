@@ -92,29 +92,29 @@ catkin build
 ## Prerequisites for running visual analysis
 
 ### Install caffe
-1. Clone caffe master from github
+* Clone caffe master from github
 `git clone http://github.com/BVLC/caffe`
 
-2. Install dependencies
+* Install dependencies
 `sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler`
 `sudo apt-get install --no-install-recommends libboost-all-dev`
 `sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev`
 `sudo apt-get install libopenblas-dev`
 
-3. Modify Makefile.config.example
+* Modify Makefile.config.example
 
 ```bash
 cd caffe
 cp Makefile.config.example Makefile.config
 ```
 
-  i. For CPU only, uncomment line 8:
+  * For CPU only, uncomment line 8:
 ```bash
 # CPU_ONLY := 1
 -->
 CPU_ONLY := 1
 ```
-  ii. For GPU, you must have nvidia drivers & CUDA & optionally cudnn installed, then uncomment line 5 if you want to use cudnn and leave line 8 commented:
+  * For GPU, you must have nvidia drivers & CUDA & optionally cudnn installed, then uncomment line 5 if you want to use cudnn and leave line 8 commented:
 ```bash
 # USE_CUDNN := 1
 -->
@@ -122,7 +122,7 @@ USE_CUDNN := 1
 ...
 # CPU_ONLY := 1
 ```
-  iii. add hdf5 lib & include paths to INCLUDE_DIRS and LIBRARY_DIRS (lines 90-91):
+  * add hdf5 lib & include paths to INCLUDE_DIRS and LIBRARY_DIRS (lines 90-91):
 ```bash
 INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
 LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib/serial/
@@ -131,8 +131,7 @@ INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/
 LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu/hdf5/serial/
 ```
 NOTE: For the TX2, the library dir is `/usr/lib/aarch64-linux-gnu/hdf5/serial/` instead of `/usr/lib/x86_64-linux-gnu/hdf5/serial/`
-
-  iv. If you use OpenCV version 3+, uncomment line 23:
+  * If you use OpenCV version 3+, uncomment line 23:
 ```bash
 # OPENCV_VERSION := 3
 -->
