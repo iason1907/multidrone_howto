@@ -94,20 +94,18 @@ catkin build
 ### Install caffe
 * Clone caffe master from github
 `git clone http://github.com/BVLC/caffe`
-
 * Install dependencies
-`sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler`
-`sudo apt-get install --no-install-recommends libboost-all-dev`
-`sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev`
-`sudo apt-get install libopenblas-dev`
-
+```bash
+sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
+sudo apt-get install --no-install-recommends libboost-all-dev
+sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
+sudo apt-get install libopenblas-dev
+```
 * Modify Makefile.config.example
-
 ```bash
 cd caffe
 cp Makefile.config.example Makefile.config
 ```
-
   * For CPU only, uncomment line 8:
 ```bash
 # CPU_ONLY := 1
@@ -137,43 +135,41 @@ NOTE: For the TX2, the library dir is `/usr/lib/aarch64-linux-gnu/hdf5/serial/` 
 -->
 OPENCV_VERSION := 3
 ```
-
-4. Make core:
+* Make core:
 `make -j4`
 NOTE: The option '-j4' will use more threads, and the make command will finish faster.
 NOTE: If you have anaconda installed, it is better to remove its paths from the LD_LIBRARY_PATH and PATH env variables both for the installation of caffe and to run the nodes. Otherwise errors with boost and opencv may occur.
-
-5. Install python dependencies:
+* Install python dependencies:
 `pip install -r python/requirements.txt`
-
-6. Make pycaffe:
+* Make pycaffe:
 `make pycaffe`
-
-7. Make caffe.pb.h:
+* Make caffe.pb.h:
 `protoc src/caffe/proto/caffe.proto --cpp_out=.`
 `mkdir include/caffe/proto`
 `mv src/caffe/proto/caffe.pb.h include/caffe/proto`
-
-8. Add CAFFE_ROOT environment variable:
+* Add CAFFE_ROOT environment variable:
 `echo "export CAFFE_ROOT=/replace/your/path/to/caffe" >> ~/.bashrc`
-
-9. Add caffe python files to PYTHONPATH variable:
+* Add caffe python files to PYTHONPATH variable:
 `echo "export PYTHONPATH=$PYTHONPATH:/replace/your/path/to/caffe/python" >> ~/.bashrc`
-
-10. If using CUDA, export CUDA_ROOT environment variable (usually in /usr/local/cuda):
+* If using CUDA, export CUDA_ROOT environment variable (usually in /usr/local/cuda):
 `echo "export CUDA_ROOT=/usr/local/cuda" >> ~/.bashrc`
 
 Caffe is ready to use!
 
 ### Install TensorFlow
-For GPU (you must have nvidia drivers & CUDA & optionally cudnn installed):
-`pip install tensorflow-gpu`
+* For GPU (you must have nvidia drivers & CUDA & optionally cudnn installed):
+```bash
+pip install tensorflow-gpu
+```
+* For CPU:
+```bash
+pip install tensorflow
+```
 
-For CPU:
-`pip install tensorflow`
-
-For the TX2, GPU:
-`pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/jp33 tensorflow-gpu`
+* For the TX2, GPU:
+```bash
+pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/jp33 tensorflow-gpu
+```
 
 ### Install darknet
 Darknet will be build from sources upon catkin build darknet_ros. It will automatically detect whether you have CUDA or not.
