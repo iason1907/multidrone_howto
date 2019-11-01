@@ -138,6 +138,7 @@ sudo apt-get install libopenblas-dev
 * Make core:
 `make -j4`
 NOTE: The option '-j4' will use more threads, and the make command will finish faster.
+
 NOTE: If you have anaconda installed, it is better to remove its paths from the LD_LIBRARY_PATH and PATH env variables both for the installation of caffe and to run the nodes. Otherwise errors with boost and opencv may occur.
 * Install python dependencies:
 `pip install -r python/requirements.txt`
