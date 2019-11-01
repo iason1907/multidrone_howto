@@ -93,78 +93,88 @@ catkin build
 
 ### Install caffe
 1. Clone caffe master from github
-	`git clone http://github.com/BVLC/caffe`
+`git clone http://github.com/BVLC/caffe`
 
 2. Install dependencies
-	`sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler`
-	`sudo apt-get install --no-install-recommends libboost-all-dev`
-	`sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev`
-	`sudo apt-get install libopenblas-dev`
+`sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler`
+`sudo apt-get install --no-install-recommends libboost-all-dev`
+`sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev`
+`sudo apt-get install libopenblas-dev`
 
 3. Modify Makefile.config.example
-	`cd caffe`
-	`cp Makefile.config.example Makefile.config`
-3a) For CPU only, uncomment line 8:
+
+```bash
+cd caffe
+cp Makefile.config.example Makefile.config
+```
+
+	i. For CPU only, uncomment line 8:
+	```bash
 	# CPU_ONLY := 1
 	-->
 	CPU_ONLY := 1
-3b) For GPU, you must have nvidia drivers & CUDA & optionally cudnn installed, then uncomment line 5 if you want to use cudnn and leave line 8 commented:
+	```
+	ii. For GPU, you must have nvidia drivers & CUDA & optionally cudnn installed, then uncomment line 5 if you want to use cudnn and leave line 8 commented:
+	```bash
 	# USE_CUDNN := 1
 	-->
 	USE_CUDNN := 1
 	...
 	# CPU_ONLY := 1
-3c) add hdf5 lib & include paths to INCLUDE_DIRS and LIBRARY_DIRS (lines 90-91):
+	```
+	iii. add hdf5 lib & include paths to INCLUDE_DIRS and LIBRARY_DIRS (lines 90-91):
+	```bash
 	INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
 	LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib/serial/
 	-->
 	INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial/
 	LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu/hdf5/serial/
+	```
+	NOTE: For the TX2, the library dir is `/usr/lib/aarch64-linux-gnu/hdf5/serial/` instead of `/usr/lib/x86_64-linux-gnu/hdf5/serial/`
 
-NOTE: For the TX2, the library dir is /usr/lib/aarch64-linux-gnu/hdf5/serial/ instead of /usr/lib/x86_64-linux-gnu/hdf5/serial/
-
-3d) If you use OpenCV version 3+, uncomment line 23:
+	iv. If you use OpenCV version 3+, uncomment line 23:
+	```bash
 	# OPENCV_VERSION := 3
 	-->
 	OPENCV_VERSION := 3
-
+	```
 
 4. Make core:
-	`make -j4`
+`make -j4`
 NOTE: The option '-j4' will use more threads, and the make command will finish faster.
 NOTE: If you have anaconda installed, it is better to remove its paths from the LD_LIBRARY_PATH and PATH env variables both for the installation of caffe and to run the nodes. Otherwise errors with boost and opencv may occur.
 
 5. Install python dependencies:
-	`pip install -r python/requirements.txt`
+`pip install -r python/requirements.txt`
 
 6. Make pycaffe:
-	`make pycaffe`
+`make pycaffe`
 
 7. Make caffe.pb.h:
-	`protoc src/caffe/proto/caffe.proto --cpp_out=.`
-	`mkdir include/caffe/proto`
-	`mv src/caffe/proto/caffe.pb.h include/caffe/proto`
+`protoc src/caffe/proto/caffe.proto --cpp_out=.`
+`mkdir include/caffe/proto`
+`mv src/caffe/proto/caffe.pb.h include/caffe/proto`
 
 8. Add CAFFE_ROOT environment variable:
-	`echo "export CAFFE_ROOT=/replace/your/path/to/caffe" >> ~/.bashrc`
+`echo "export CAFFE_ROOT=/replace/your/path/to/caffe" >> ~/.bashrc`
 
 9. Add caffe python files to PYTHONPATH variable:
-	`echo "export PYTHONPATH=$PYTHONPATH:/replace/your/path/to/caffe/python" >> ~/.bashrc`
+`echo "export PYTHONPATH=$PYTHONPATH:/replace/your/path/to/caffe/python" >> ~/.bashrc`
 
 10. If using CUDA, export CUDA_ROOT environment variable (usually in /usr/local/cuda):
-	`echo "export CUDA_ROOT=/usr/local/cuda" >> ~/.bashrc`
+`echo "export CUDA_ROOT=/usr/local/cuda" >> ~/.bashrc`
 
 Caffe is ready to use!
 
 ### Install TensorFlow
 For GPU (you must have nvidia drivers & CUDA & optionally cudnn installed):
-	`pip install tensorflow-gpu`
+`pip install tensorflow-gpu`
 
 For CPU:
-	`pip install tensorflow`
+`pip install tensorflow`
 
 For the TX2, GPU:
-	`pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/jp33 tensorflow-gpu`
+`pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/jp33 tensorflow-gpu`
 
 ### Install darknet
 Darknet will be build from sources upon catkin build darknet_ros. It will automatically detect whether you have CUDA or not.
