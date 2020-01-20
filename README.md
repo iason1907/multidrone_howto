@@ -43,7 +43,7 @@ sudo make install
 ```
 * **Install gstreamer**
 ```bash
-sudo apt-get install gstreamer1.0-tools gstreamer1.0-gev
+sudo apt-get install gstreamer1.0-tools gstreamer1.0-dev
 sudo apt-get install libgstreamer-plugins-base1.0-dev libgstreamer-plugins-good1.0-dev
 ```
 
@@ -51,7 +51,7 @@ sudo apt-get install libgstreamer-plugins-base1.0-dev libgstreamer-plugins-good1
 ```bash
 sudo apt-get install ros-kinetic-mavros*
 sudo apt-get install ros-kinetic-geodesy
-sudo geographiclib-get-geoid egm96-5
+sudo geographiclib-get-geoids egm96-5
 sudo apt-get install ros-kinetic-gscam
 ```
 
