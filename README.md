@@ -78,7 +78,7 @@ copy and paste multidrone repo to ~/multidrone_ws/src/
 ## Clone GRVC UAL
 
 ```bash
-cd ~/multidrone_ws/src/multidrone_full
+cd ~/multidrone_ws/src/
 git clone https://github.com/grvcTeam/grvc-ual.git
 ```
 
